@@ -14,9 +14,13 @@
 
     <button onclick="window.JsServer.Unfreeze();">解冻</button>
 
+    <ul>
+        <li ng-repeat="app in apps">{{app.app_name}} {{app.pkg_name}}</li>
+    </ul>
+
     <script src="js/jquery-3.0.0.min.js"></script>
     <script src="js/angular.min.js"></script>
-    <script src="js/event.js"></script>
+    <script src="js/apps.js"></script>
 <script>
     var weekday_zh = ["日", "一", "二", "三", "四", "五", "六"];
     var KEYGUARD_SHOWN = 17;  //锁屏
@@ -50,71 +54,16 @@
         fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
         return fmt;
     }
-    var eventsDb = eventsTest;
+
+    //从这开始
+    var apps = apps_test;
     if (window.navigator.userAgent.indexOf("Edg") == -1) {
-        eventsDb = window.JsServer.GetAllEvent();
-        eventsDb = JSON.parse(eventsDb);
+        apps = window.JsServer.GetAppList();
+        apps = JSON.parse(apps);
     }
 
     app.controller('myCtrl', function($scope, $http) {
-        days = {};
-        for (var key in eventsDb) {
-            var time = new Date(parseInt(key));
-            var date = time.Format("yyyy-MM-dd（") + weekday_zh[time.getDay()] + "）";
-            var second = time.getSeconds() + 60*(time.getMinutes() + 60*time.getHours());
-            if (days[date] == null) {
-                days[date] = [];
-            }
-            days[date].push({
-                sec_of_day: second,          //当天的秒数
-                type: eventsDb[key],         //事件类型 (17 or 18)
-                clock: time.Format("hh:mm")  //小时和分钟
-            });
-        }
-        // days = {"2022-01-01": [{sec_of_day: 123, type:17}, ...], "2022-01-02": ...}
-        var daySec = 24*60*60;
-        for (var key in days) {
-            var events = days[key];
-            events.sort(compare); //把一天的所有事件按时间排序
-            // 锁屏-->解锁  做一个灰色<div>
-            if (events[0].type != KEYGUARD_SHOWN) {
-                //一天最开始必须是锁屏
-                events.unshift({sec_of_day:0, type:KEYGUARD_SHOWN, clock:"00:00"})
-            }
-            if (events.at(-1).type != KEYGUARD_HIDDEN) {
-                //一天最后必须是解锁
-                events.push({sec_of_day:daySec, type:KEYGUARD_HIDDEN, clock:"24:00"})
-            }
-            days[key] = []
-            var one_div_ok = true;
-            for (var i in events) {
-                if (events[i].type == KEYGUARD_SHOWN) {
-                    if (!one_div_ok) continue; //连续多个锁屏事件
-                    days[key].push({
-                        left: events[i].sec_of_day/daySec*100, //div左边位置百分比
-                        start_sec: events[i].sec_of_day,       //记录一下div开始的秒数,用于计算宽度
-                        time_range: events[i].clock + " ~ ",   //时间范围
-                    })
-                    one_div_ok = false;
-                }
-                if (days[key].length > 0 && events[i].type == KEYGUARD_HIDDEN) {
-                    if (one_div_ok) continue; //连续多个解锁事件
-                    div = days[key].at(-1);
-                    div.width = (events[i].sec_of_day - div.start_sec)/daySec*100;
-                    div.time_range += events[i].clock;
-                    one_div_ok = true;
-                }
-            }
-        }
-        // days = {"2022-01-01": [{left: 12.34, width:23.45}, ...], "2022-01-02": ...}
-        $scope.days = Object.entries(days);
-        // $scope.days = [ ["2022-01-01", [{left: 12.34, width:23.45}, ...] ], [ "2022-01-02", [...] ] ...}
-        $scope.days.sort();
-        $scope.time_range = "点击灰色区域显示时间范围";
-        console.log("\n浏览器类型：\n\n" + window.navigator.userAgent);
-        $scope.ShowTimeRange = function(time_range) {
-            $scope.time_range = time_range;
-        }
+        $scope.apps = apps;
     });
 </script>
 </body>

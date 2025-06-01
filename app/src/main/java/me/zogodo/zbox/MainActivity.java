@@ -18,6 +18,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -52,6 +54,12 @@ public class MainActivity extends AppCompatActivity
         }
         Log.e("zurl", indexUrl, null);
         //Log.e("zzzc", stringFromJNI(), null);
+
+        try {
+            JsServer.GetAppList();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         dpm = (DevicePolicyManager) this.getSystemService(Context.DEVICE_POLICY_SERVICE);
         admin = new ComponentName(this, DeviceAdminReceiverImpl.class);
