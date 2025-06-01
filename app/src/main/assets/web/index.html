@@ -29,18 +29,12 @@
 <script>
     var is_debug = window.navigator.userAgent.indexOf("Edg") != -1;
 
-    function compare(a, b) {
-        if (a.app_name < b.app_name) return -1;
-        if (a.app_name > b.app_name) return 1;
-        return 0;
-    }
-
     var apps = apps_test;
     if (!is_debug) {
         apps = window.JsServer.GetAppList();
         apps = JSON.parse(apps);
     }
-    apps.sort(compare);
+    apps.sort((a, b) => a.app_name.localeCompare(b.app_name));
 
     var app = angular.module('myApp', []);
     app.controller('myCtrl', function($scope, $http) {
