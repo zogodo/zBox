@@ -12,8 +12,8 @@
             <th>状态</td>
             <th>应用</td>
         </tr>
-        <tr ng-repeat="app in apps">
-            <td ng-click="Freeze(app)">
+        <tr ng-repeat="app in apps" class="{{GetClass(app)}}">
+            <td class="center_td" ng-click="Freeze(app)">
                 {{app.is_hidden?"已冻结":"已解冻"}}
             </td>
             <td ng-click="OpenApp(app)">
@@ -64,6 +64,13 @@
             if (!is_debug) {
                 // 打开APP
             }
+        };
+
+        $scope.GetClass = function(app) {
+            if (app.is_hidden) {
+                return "gray_tr";
+            }
+            return "";
         };
 
     });

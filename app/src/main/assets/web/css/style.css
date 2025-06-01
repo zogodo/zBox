@@ -12,3 +12,12 @@ td, th {
     padding: 10px;
     border: 1px solid #000;
 }
+th {
+    background-color: gray;
+}
+.gray_tr {
+    background-color: lightgray;
+}
+.center_td {
+    text-align: center;
+}
