@@ -31,7 +31,10 @@ public class JsServer {
             if (MainActivity.me.getPackageName().equals(app.packageName)) continue; //跳过自己
             if ((app.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 1) continue; //跳过系统应用
 
-            boolean hidden = MainActivity.dpm.isApplicationHidden(MainActivity.admin, app.packageName);
+            boolean hidden = false;
+            if (MainActivity.isOwner) {
+                hidden = MainActivity.dpm.isApplicationHidden(MainActivity.admin, app.packageName);
+            }
             if (hidden) {
                 Log.e("HiddenApp", app.packageName + " is hidden");
             }
@@ -43,8 +46,9 @@ public class JsServer {
             jsonObject.put("app_name", String.valueOf(cs));
             jsonObject.put("is_hidden", hidden);
             jsonArray.put(jsonObject);
+            //Log.e("zzz", "getAppList1 [" + app.packageName + "] [" + String.valueOf(cs) + "]");
         }
-         //Log.e("xxx json ", "zzzj" + jsonArray.toString(), null);
+        //Log.e("xxx json ", "zzzj" + jsonArray.toString(), null);
         return jsonArray.toString();
     }
 
