@@ -7,15 +7,15 @@
 <body ng-app="myApp" ng-controller="myCtrl">
     <h1>zBox</h1>
 
-    <button onclick="window.JsServer.Freeze();">冻结</button>
+    <button ng-click="Freeze(app.pkg_name)">冻结</button>
 
     <br />
     <br />
 
-    <button onclick="window.JsServer.Unfreeze();">解冻</button>
+    <button ng-click="Unfreeze(app.pkg_name)">解冻</button>
 
     <ul>
-        <li ng-repeat="app in apps">{{app.app_name}} {{app.pkg_name}}</li>
+        <li ng-repeat="app in apps" ng-click="Freeze(app.pkg_name)">{{app.app_name}} {{app.pkg_name}}</li>
     </ul>
 
     <script src="js/jquery-3.0.0.min.js"></script>
@@ -64,6 +64,16 @@
 
     app.controller('myCtrl', function($scope, $http) {
         $scope.apps = apps;
+
+        $scope.Freeze = function(pkg_name) {
+            pkg_name = "tv.danmaku.bili";
+            window.JsServer.Freeze(pkg_name);
+        }
+
+        $scope.Unfreeze = function(pkg_name) {
+            pkg_name = "tv.danmaku.bili";
+            window.JsServer.Unfreeze(pkg_name);
+        }
     });
 </script>
 </body>

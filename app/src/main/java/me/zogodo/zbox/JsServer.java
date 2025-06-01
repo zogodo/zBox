@@ -16,35 +16,22 @@ import java.util.List;
 public class JsServer
 {
     @JavascriptInterface
-    public static String GetAllEvent() {
-        // Log.e("xx ", "zzzj" + json.toString(), null);
-        return "{}";
-    }
-
-    @JavascriptInterface
-    public static String Freeze() {
+    public static String Freeze(String pkg_name) {
         Log.e("xx ", "Freeze zzz", null);
-        //tv.danmaku.bili
-        MainActivity.dpm.setApplicationHidden(MainActivity.admin, "tv.danmaku.bili", true); // 隐藏/禁用 App
+        MainActivity.dpm.setApplicationHidden(MainActivity.admin, pkg_name, true); // 隐藏/禁用 App
         return "{}";
     }
 
     @JavascriptInterface
-    public static String Unfreeze() {
+    public static String Unfreeze(String pkg_name) {
         Log.e("xx ", "Unfreeze zzz", null);
-        MainActivity.dpm.setApplicationHidden(MainActivity.admin, "tv.danmaku.bili", false);
+        MainActivity.dpm.setApplicationHidden(MainActivity.admin, pkg_name, false);
         return "{}";
     }
 
     @JavascriptInterface
     public static String GetAppList() throws JSONException {
-
-        //JSONObject obj = new JSONObject();
-        //obj.put("name", "Alice"); // OK，不用 try-catch
-        //obj.put("age", 25);
-
         JSONArray jsonArray = new JSONArray();
-
         PackageManager pm = MainActivity.me.getPackageManager();
         List<PackageInfo> packages = pm.getInstalledPackages(0);
         for (PackageInfo pinfo : packages) {
@@ -57,8 +44,7 @@ public class JsServer
             Log.e("zzz", "getAppList1 [" + pinfo.packageName + "] [" + String.valueOf(cs) + "]");
             jsonArray.put(jsonObject);
         }
-
-         Log.e("xxx json ", "zzzj" + jsonArray.toString(), null);
+         //Log.e("xxx json ", "zzzj" + jsonArray.toString(), null);
         return jsonArray.toString();
     }
 
