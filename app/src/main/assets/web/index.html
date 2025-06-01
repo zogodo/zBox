@@ -30,12 +30,8 @@
     var is_debug = window.navigator.userAgent.indexOf("Edg") != -1;
 
     function compare(a, b) {
-        if (a.sec_of_day < b.sec_of_day) {
-            return -1;
-        }
-        if (a.sec_of_day > b.sec_of_day) {
-            return 1;
-        }
+        if (a.app_name < b.app_name) return -1;
+        if (a.app_name > b.app_name) return 1;
         return 0;
     }
 
@@ -44,6 +40,7 @@
         apps = window.JsServer.GetAppList();
         apps = JSON.parse(apps);
     }
+    apps.sort(compare);
 
     var app = angular.module('myApp', []);
     app.controller('myCtrl', function($scope, $http) {
