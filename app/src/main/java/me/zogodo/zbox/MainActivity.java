@@ -56,9 +56,6 @@ public class MainActivity extends AppCompatActivity
         dpm = (DevicePolicyManager) this.getSystemService(Context.DEVICE_POLICY_SERVICE);
         admin = new ComponentName(this, DeviceAdminReceiverImpl.class);
 
-        //String allEvents = MyUsage.GetAllEvent();
-        //Log.e("zzz", "allEvents = " + allEvents, null);
-
         webView = new MyWebView(this);
         webView.loadUrl(indexUrl);
         this.setContentView(webView);
@@ -105,20 +102,6 @@ public class MainActivity extends AppCompatActivity
                 System.exit(0);
             }
         }
-    }
-
-    @JavascriptInterface
-    public static String Freeze() {
-         Log.e("xx ", "Freeze", null);
-        dpm.setApplicationHidden(admin, "tv.danmaku.bili", true); // 隐藏/禁用 App
-        return "{}";
-    }
-
-    @JavascriptInterface
-    public static String Unfreeze() {
-        Log.e("xx ", "Unfreeze", null);
-        dpm.setApplicationHidden(admin, "tv.danmaku.bili", false);
-        return "{}";
     }
 
 }

@@ -7,12 +7,12 @@
 <body ng-app="myApp" ng-controller="myCtrl">
     <h1>zBox</h1>
 
-    <button onclick="window.MyUsage.Freeze();">冻结</button>
+    <button onclick="window.JsServer.Freeze();">冻结</button>
 
     <br />
     <br />
 
-    <button onclick="window.MyUsage.Unfreeze();">解冻</button>
+    <button onclick="window.JsServer.Unfreeze();">解冻</button>
 
     <script src="js/jquery-3.0.0.min.js"></script>
     <script src="js/angular.min.js"></script>
@@ -52,7 +52,7 @@
     }
     var eventsDb = eventsTest;
     if (window.navigator.userAgent.indexOf("Edg") == -1) {
-        eventsDb = window.MyUsage.GetAllEvent();
+        eventsDb = window.JsServer.GetAllEvent();
         eventsDb = JSON.parse(eventsDb);
     }
 

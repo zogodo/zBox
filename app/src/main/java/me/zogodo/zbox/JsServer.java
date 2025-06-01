@@ -3,7 +3,7 @@ package me.zogodo.zbox;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
 
-public class MyUsage
+public class JsServer
 {
     @JavascriptInterface
     public static String GetAllEvent() {

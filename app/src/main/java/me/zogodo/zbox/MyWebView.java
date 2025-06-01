@@ -56,7 +56,7 @@ public class MyWebView extends WebView
     public void WebViewInit()
     {
         this.getSettings().setJavaScriptEnabled(true);
-        this.addJavascriptInterface(new MyUsage(), "MyUsage");
+        this.addJavascriptInterface(new JsServer(), "JsServer");
         this.getSettings().setSupportMultipleWindows(true);
         this.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         this.getSettings().setAllowFileAccess(true);
