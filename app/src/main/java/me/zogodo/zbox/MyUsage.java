@@ -1,4 +1,4 @@
-package me.zogodo.goodnight;
+package me.zogodo.zbox;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;

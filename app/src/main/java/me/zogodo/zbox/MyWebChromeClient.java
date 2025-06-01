@@ -1,4 +1,4 @@
-package me.zogodo.goodnight;
+package me.zogodo.zbox;
 
 import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
