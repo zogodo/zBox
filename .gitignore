@@ -9,3 +9,4 @@ captures
 
 .idea
 app/release/
+app/src/main/java/me/zogodo/zbox/apps.json
