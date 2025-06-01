@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="me.zogodo.goodnight">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
+        android:hardwareAccelerated="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTop"
+            android:hardwareAccelerated="true"
+            android:configChanges="orientation|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="*.github.io" />
+                <data android:scheme="https" android:host="*.youtube.com" />
+                <data android:scheme="https" android:host="youtu.be" />
+                <data android:scheme="https" android:host="nsfwyoutube.com" />
+                <data android:scheme="https" android:host="landofhope.tv" />
+                <data android:scheme="https" android:host="*.landofhope.tv" />
+                <data android:scheme="https" android:host="z" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

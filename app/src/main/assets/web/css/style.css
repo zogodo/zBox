@@ -1,0 +1,36 @@
+body {
+    background-color: #000;
+}
+h1 {
+    color: white;
+    margin: 0 0 0.3em 0.2em;
+}
+p {
+    color: lightgray;
+    float: right;
+    margin: -2em 0 0 0;
+}
+.one_day {
+    width: 100%;
+    border: #000 solid 1px;
+    position: relative;
+    height: 20px;
+    margin-bottom: 10px;
+    background-color: #fff;
+}
+.one_day div {
+    position: absolute;
+    left: 50%;
+    height: 100%;
+    width: 10%;
+    background-color: lightgray;
+}
+.one_day div:hover {
+    background-color: gray;
+}
+.one_day span {
+    position: absolute;
+    font-size: 12px;
+    padding: 1px 0;
+    left: 54%;
+}

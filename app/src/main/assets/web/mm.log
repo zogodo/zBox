@@ -1,0 +1,7 @@
+
+http://120.78.202.127:8065/api/v4/channels/a3jagyy34tnkz81dtjwytj7mqr/members/me
+
+{"channel_id":"a3jagyy34tnkz81dtjwytj7mqr","user_id":"axmzzsg3ubg5ubis6do8nfekcy","roles":"channel_user","last_viewed_at":0,"msg_count":0,"mention_count":1,"mention_count_root":1,"urgent_mention_count":0,"msg_count_root":0,"notify_props":{"desktop":"default","email":"default","ignore_channel_mentions":"default","mark_unread":"all","push":"default"},"last_update_at":1675929465782,"scheme_guest":false,"scheme_user":true,"scheme_admin":false,"explicit_roles":""}
+
+
+
