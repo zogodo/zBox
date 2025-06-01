@@ -5,19 +5,14 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body ng-app="myApp" ng-controller="myCtrl">
-    <h1>晚安安</h1>
-    <p>{{time_range}}</p>
-    <div class="one_day" ng-repeat="day in days">
-        <div ng-repeat="evn in day.at(1)"
-            style="left:{{evn.left}}%;width:{{evn.width}}%;"
-            ng-click="ShowTimeRange(evn.time_range)"
-            ng-attr-title="{{evn.time_range}}"></div>
-        <span>{{day[0]}}</span>
-        <div style="left:33.33%;width:1px;background:red;"></div> <!--08:00-->
-        <div style="left:95.83%;width:1px;background:red;"></div> <!--23:00-->
-        <div style="left:25%;width:1px;background:blue;"></div> <!--06:00-->
-        <div style="left:50%;width:1px;background:blue;"></div> <!--12:00-->
-    </div>
+    <h1>zBox</h1>
+
+    <button onclick="window.MyUsage.Freeze();">冻结</button>
+
+    <br />
+    <br />
+
+    <button onclick="window.MyUsage.Unfreeze();">解冻</button>
 
     <script src="js/jquery-3.0.0.min.js"></script>
     <script src="js/angular.min.js"></script>

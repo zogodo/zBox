@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.widget.Toast;
 
@@ -24,15 +25,15 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity
 {
-    static {
-        //System.loadLibrary("native-lib");
-    }
 
     public static MainActivity me;
     public static String indexUrl = "file:///android_asset/web/index.html";
     public static WebView webView = null;
     long exitTime = 0;
     public static SqliteHelper dbHelper;
+
+    static DevicePolicyManager dpm;
+    static ComponentName admin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -52,37 +53,8 @@ public class MainActivity extends AppCompatActivity
         Log.e("zurl", indexUrl, null);
         //Log.e("zzzc", stringFromJNI(), null);
 
-        DevicePolicyManager dpm = (DevicePolicyManager) this.getSystemService(Context.DEVICE_POLICY_SERVICE);
-        ComponentName admin = new ComponentName(this, DeviceAdminReceiverImpl.class);
-        dpm.setApplicationHidden(admin, "tv.danmaku.bili", true); // 隐藏/禁用 App
-        //dpm.setApplicationHidden(admin, "tv.danmaku.bili", false);
-
-        /*
-        try {
-            Process process = Runtime.getRuntime().exec("pm disable-user --user 0 tv.danmaku.bili");
-            Log.e("zzz", "disable ok? ", null);
-
-            // 读取标准输出
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                Log.e("DisableApp", "OUT: " + line);
-            }
-
-            // 读取错误输出
-            BufferedReader error = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-            while ((line = error.readLine()) != null) {
-                Log.e("DisableApp", "ERR: " + line);
-            }
-
-            int resultCode = process.waitFor();
-            Log.e("DisableApp", "Process finished with code " + resultCode);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("zzz", "printStackTrace " + e.toString(), null);
-        }
-        */
+        dpm = (DevicePolicyManager) this.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        admin = new ComponentName(this, DeviceAdminReceiverImpl.class);
 
         //String allEvents = MyUsage.GetAllEvent();
         //Log.e("zzz", "allEvents = " + allEvents, null);
@@ -135,5 +107,18 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    //public native String stringFromJNI();
+    @JavascriptInterface
+    public static String Freeze() {
+         Log.e("xx ", "Freeze", null);
+        dpm.setApplicationHidden(admin, "tv.danmaku.bili", true); // 隐藏/禁用 App
+        return "{}";
+    }
+
+    @JavascriptInterface
+    public static String Unfreeze() {
+        Log.e("xx ", "Unfreeze", null);
+        dpm.setApplicationHidden(admin, "tv.danmaku.bili", false);
+        return "{}";
+    }
+
 }
