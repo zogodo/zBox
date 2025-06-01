@@ -28,11 +28,13 @@ public class JsServer {
         PackageManager pm = MainActivity.me.getPackageManager();
         List<PackageInfo> allApps = pm.getInstalledPackages(PackageManager.MATCH_DISABLED_COMPONENTS | PackageManager.MATCH_UNINSTALLED_PACKAGES);
         for (PackageInfo app : allApps) {
+            if (MainActivity.me.getPackageName().equals(app.packageName)) continue; //跳过自己
+            if ((app.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 1) continue; //跳过系统应用
+
             boolean hidden = MainActivity.dpm.isApplicationHidden(MainActivity.admin, app.packageName);
             if (hidden) {
                 Log.e("HiddenApp", app.packageName + " is hidden");
             }
-            if ((app.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 1) continue;
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("pkg_name", app.packageName);
