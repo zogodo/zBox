@@ -59,7 +59,11 @@
         $scope.apps = apps;
 
         $scope.Freeze = function(app) {
-            window.JsServer.Freeze(app.pkg_name, !app.is_hidden);
+            var re = window.JsServer.Freeze(app.pkg_name, !app.is_hidden);
+            if (!re) {
+                alert("操作失败, 请检查zBox是否设备管理员!");
+                return;
+            }
             app.is_hidden = !app.is_hidden;
         }
 
