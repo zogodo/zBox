@@ -16,16 +16,9 @@ import java.util.List;
 public class JsServer
 {
     @JavascriptInterface
-    public static String Freeze(String pkg_name) {
+    public static String Freeze(String pkg_name, boolean hidden) {
         Log.e("xx ", "Freeze zzz", null);
-        MainActivity.dpm.setApplicationHidden(MainActivity.admin, pkg_name, true); // 隐藏/禁用 App
-        return "{}";
-    }
-
-    @JavascriptInterface
-    public static String Unfreeze(String pkg_name) {
-        Log.e("xx ", "Unfreeze zzz", null);
-        MainActivity.dpm.setApplicationHidden(MainActivity.admin, pkg_name, false);
+        MainActivity.dpm.setApplicationHidden(MainActivity.admin, pkg_name, hidden); // 隐藏/禁用 App
         return "{}";
     }
 
