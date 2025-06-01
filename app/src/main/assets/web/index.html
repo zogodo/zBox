@@ -66,13 +66,13 @@
         $scope.apps = apps;
 
         $scope.Freeze = function(pkg_name) {
-            pkg_name = "tv.danmaku.bili";
             window.JsServer.Freeze(pkg_name);
+            alert(pkg_name + " 已冻结");
         }
 
         $scope.Unfreeze = function(pkg_name) {
-            pkg_name = "tv.danmaku.bili";
             window.JsServer.Unfreeze(pkg_name);
+            alert(pkg_name + " 已解冻");
         }
     });
 </script>

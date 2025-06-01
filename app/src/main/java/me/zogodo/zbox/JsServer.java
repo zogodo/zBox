@@ -33,18 +33,28 @@ public class JsServer
     public static String GetAppList() throws JSONException {
         JSONArray jsonArray = new JSONArray();
         PackageManager pm = MainActivity.me.getPackageManager();
-        List<PackageInfo> packages = pm.getInstalledPackages(0);
-        for (PackageInfo pinfo : packages) {
+        List<PackageInfo> allApps = pm.getInstalledPackages(PackageManager.MATCH_DISABLED_COMPONENTS | PackageManager.MATCH_UNINSTALLED_PACKAGES);
+        //List<ApplicationInfo> allApps = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+        //.getInstalledPackages(MATCH_DISABLED_COMPONENTS | MATCH_UNINSTALLED_PACKAGES);
+        for (PackageInfo app : allApps) {
+            boolean hidden = MainActivity.dpm.isApplicationHidden(MainActivity.admin, app.packageName);
+            if (hidden) {
+                Log.e("HiddenApp", app.packageName + " is hidden");
+            }
+            //if ((app.flags & ApplicationInfo.FLAG_SYSTEM) == 1) continue;
+            if ((app.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 1) continue;
+
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("pkg_name", pinfo.packageName);
-            char[] cs = pinfo.applicationInfo.loadLabel(pm).toString().toCharArray();
+            jsonObject.put("pkg_name", app.packageName);
+            //char[] cs = pm.getApplicationLabel(app).toString().toCharArray();
+            char[] cs = app.applicationInfo.loadLabel(pm).toString().toCharArray();
             if (cs[0] >= 'a' && cs[0] <= 'z') cs[0] -= 32; //首字母大写
             jsonObject.put("app_name", String.valueOf(cs));
-            jsonObject.put("is_sys", pinfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM);
-            Log.e("zzz", "getAppList1 [" + pinfo.packageName + "] [" + String.valueOf(cs) + "]");
+            jsonObject.put("is_hidden", hidden);
+            //Log.e("zzz", "getAppList1 [" + pinfo.packageName + "] [" + String.valueOf(cs) + "]");
             jsonArray.put(jsonObject);
         }
-         //Log.e("xxx json ", "zzzj" + jsonArray.toString(), null);
+         Log.e("xxx json ", "zzzj" + jsonArray.toString(), null);
         return jsonArray.toString();
     }
 

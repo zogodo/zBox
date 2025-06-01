@@ -55,14 +55,19 @@ public class MainActivity extends AppCompatActivity
         Log.e("zurl", indexUrl, null);
         //Log.e("zzzc", stringFromJNI(), null);
 
+        /*
         try {
             JsServer.GetAppList();
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        */
 
         dpm = (DevicePolicyManager) this.getSystemService(Context.DEVICE_POLICY_SERVICE);
         admin = new ComponentName(this, DeviceAdminReceiverImpl.class);
+
+        boolean isOwner = dpm.isDeviceOwnerApp(this.getPackageName());
+        Log.e("DeviceOwner", "Is device owner? " + isOwner);
 
         webView = new MyWebView(this);
         webView.loadUrl(indexUrl);
