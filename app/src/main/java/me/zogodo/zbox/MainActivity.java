@@ -2,6 +2,8 @@ package me.zogodo.zbox;
 
 import android.annotation.TargetApi;
 import android.app.AppOpsManager;
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,6 +17,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity
@@ -47,11 +52,37 @@ public class MainActivity extends AppCompatActivity
         Log.e("zurl", indexUrl, null);
         //Log.e("zzzc", stringFromJNI(), null);
 
-        if (!isGrantedUsagePermission(this))
-        {
-            startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+        DevicePolicyManager dpm = (DevicePolicyManager) this.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        ComponentName admin = new ComponentName(this, DeviceAdminReceiverImpl.class);
+        dpm.setApplicationHidden(admin, "tv.danmaku.bili", true); // 隐藏/禁用 App
+        //dpm.setApplicationHidden(admin, "tv.danmaku.bili", false);
+
+        /*
+        try {
+            Process process = Runtime.getRuntime().exec("pm disable-user --user 0 tv.danmaku.bili");
+            Log.e("zzz", "disable ok? ", null);
+
+            // 读取标准输出
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                Log.e("DisableApp", "OUT: " + line);
+            }
+
+            // 读取错误输出
+            BufferedReader error = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+            while ((line = error.readLine()) != null) {
+                Log.e("DisableApp", "ERR: " + line);
+            }
+
+            int resultCode = process.waitFor();
+            Log.e("DisableApp", "Process finished with code " + resultCode);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("zzz", "printStackTrace " + e.toString(), null);
         }
-        MyUsage.TestEvent(this);
+        */
 
         //String allEvents = MyUsage.GetAllEvent();
         //Log.e("zzz", "allEvents = " + allEvents, null);
