@@ -37,9 +37,9 @@ public class JsServer {
             }
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("pkg_name", app.packageName);
             char[] cs = app.applicationInfo.loadLabel(pm).toString().toCharArray();
             if (cs[0] >= 'a' && cs[0] <= 'z') cs[0] -= 32; //首字母大写
+            jsonObject.put("pkg_name", app.packageName);
             jsonObject.put("app_name", String.valueOf(cs));
             jsonObject.put("is_hidden", hidden);
             jsonArray.put(jsonObject);
