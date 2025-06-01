@@ -12,16 +12,16 @@
 
     <table>
         <tr>
-            <th>状态</td>
+            <th class="status_th">状态</td>
             <th>应用</td>
         </tr>
         <tr ng-repeat="app in apps" class="{{GetClass(app)}}">
-            <td class="center_td" ng-click="Freeze(app)">
+            <td class="status_td" ng-click="Freeze(app)">
                 {{app.is_hidden?"已冻结":"已解冻"}}
             </td>
             <td ng-click="OpenApp(app)">
-                <div>{{app.app_name}}</div>
-                <div>{{app.pkg_name}}</div>
+                <div class="app_name_td">{{app.app_name}}</div>
+                <div class="pkg_name_td">{{app.pkg_name}}</div>
             </td>
         </tr>
     </table>
