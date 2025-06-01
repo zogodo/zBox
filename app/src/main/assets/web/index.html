@@ -5,7 +5,10 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body ng-app="myApp" ng-controller="myCtrl">
-    <h1>zBox</h1>
+    <h1>
+        zBox
+        <input type="text" id="myInput" />
+    </h1>
 
     <table>
         <tr>
@@ -35,6 +38,13 @@
         apps = JSON.parse(apps);
     }
     apps.sort((a, b) => a.app_name.localeCompare(b.app_name));
+
+    document.getElementById("myInput").focus();
+    /*
+    window.onload = function () {
+        document.getElementById('myInput').focus();
+    };
+    */
 
     var app = angular.module('myApp', []);
     app.controller('myCtrl', function($scope, $http) {
