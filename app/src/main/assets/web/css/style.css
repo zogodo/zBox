@@ -4,6 +4,12 @@ body {
 h1 {
     margin: 0 0 0.3em 0.2em;
 }
+input {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
 table {
     width: 100%;
     border-collapse: collapse;
