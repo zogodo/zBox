@@ -5,13 +5,13 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body ng-app="myApp" ng-controller="myCtrl">
-    <input id="myInput" type="email" placeholder="搜索" />
+    <input id="myInput" type="text" inputmode="latin" placeholder="搜索" ng-model="filter_text" ng-change="FilterApp()" />
     <table>
         <tr>
             <th class="status_th">状态</td>
             <th>应用</td>
         </tr>
-        <tr ng-repeat="app in apps" class="{{GetClass(app)}}">
+        <tr ng-repeat="app in apps" ng-if="!app.weed_out" class="{{GetClass(app)}}">
             <td class="status_td" ng-click="Freeze(app)" ng-bind="app.is_hidden?'已冻结':'已解冻'"></td>
             <td ng-click="OpenApp(app)">
                 <div class="app_name_td" ng-bind="app.app_name"></div>
@@ -34,11 +34,6 @@
     apps.sort((a, b) => a.app_name.localeCompare(b.app_name));
 
     document.getElementById("myInput").focus();
-    /*
-    window.onload = function () {
-        document.getElementById('myInput').focus();
-    };
-    */
 
     var app = angular.module('myApp', []);
     app.controller('myCtrl', function($scope, $http) {
@@ -66,6 +61,21 @@
                 return "gray_tr";
             }
             return "";
+        };
+
+        $scope.FilterApp = function() {
+            var filter_text = $scope.filter_text.toLowerCase();
+            for (var i = 0; i < $scope.apps.length; i++) {
+                if ($scope.apps[i].app_name.toLowerCase().indexOf(filter_text) != -1) {
+                    $scope.apps[i].weed_out = false;
+                    continue
+                }
+                if ($scope.apps[i].pkg_name.toLowerCase().indexOf(filter_text) != -1) {
+                    $scope.apps[i].weed_out = false;
+                    continue
+                }
+                $scope.apps[i].weed_out = true;
+            }
         };
 
     });
