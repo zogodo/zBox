@@ -1,5 +1,6 @@
 package me.zogodo.zbox;
 
+import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -9,9 +10,7 @@ import android.util.Log;
 import android.webkit.WebView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     public static MainActivity me;
     public static String indexUrl = "file:///android_asset/web/index.html";
     public static WebView webView = null;
@@ -25,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
         MainActivity.me = this;
         dbHelper = new SqliteHelper(this);
 
