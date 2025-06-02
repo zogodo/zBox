@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         //Log.e("zzzc", stringFromJNI(), null);
 
         dpm = (DevicePolicyManager) this.getSystemService(Context.DEVICE_POLICY_SERVICE);
-        admin = new ComponentName(this, DeviceAdminReceiverImpl.class);
+        admin = new ComponentName(this, DeviceAdminReceiver.class);
 
         isOwner = dpm.isDeviceOwnerApp(this.getPackageName());
         Log.e("DeviceOwner", "Is device owner? " + isOwner);
