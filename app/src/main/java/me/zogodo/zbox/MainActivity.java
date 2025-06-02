@@ -70,4 +70,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void OpenApp(String pkg_name) {
+        Intent launchIntent = getPackageManager().getLaunchIntentForPackage(pkg_name);
+        if (launchIntent != null) {
+            startActivity(launchIntent); // 启动目标应用
+        } else {
+            Toast.makeText(this, "请先解冻此App", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

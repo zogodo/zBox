@@ -51,9 +51,8 @@
         };
 
         $scope.OpenApp = function(app) {
-            if (!is_debug) {
-                // 打开APP
-            }
+            if (is_debug) return;
+            window.JsServer.OpenApp(app.pkg_name);
         };
 
         $scope.GetClass = function(app) {

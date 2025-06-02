@@ -23,6 +23,13 @@ public class JsServer {
     }
 
     @JavascriptInterface
+    public static boolean OpenApp(String pkg_name) {
+        Log.e("xx ", "OpenApp zzz", null);
+        MainActivity.me.OpenApp(pkg_name);
+        return true;
+    }
+
+    @JavascriptInterface
     public static String GetAppList() throws JSONException {
         JSONArray jsonArray = new JSONArray();
         PackageManager pm = MainActivity.me.getPackageManager();
