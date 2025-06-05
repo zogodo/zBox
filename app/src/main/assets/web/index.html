@@ -7,10 +7,13 @@
 <body ng-app="myApp" ng-controller="myCtrl">
     <input id="myInput" type="text" inputmode="latin" placeholder="搜索" ng-model="filter_text" ng-change="FilterApp()" />
     <table>
+        <thead>
         <tr>
             <th class="status_th">状态</td>
             <th>应用</td>
         </tr>
+        </thead>
+        <tbody>
         <tr ng-repeat="app in apps" ng-if="!app.weed_out" class="{{GetClass(app)}}">
             <td class="status_td" ng-click="Freeze(app)" ng-bind="app.is_hidden?'已冻结':'已解冻'"></td>
             <td ng-click="OpenApp(app)">
@@ -18,6 +21,7 @@
                 <div class="pkg_name_td" ng-bind="app.pkg_name"></div>
             </td>
         </tr>
+        </tbody>
     </table>
 
     <script src="js/jquery-3.0.0.min.js"></script>

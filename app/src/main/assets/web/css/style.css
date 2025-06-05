@@ -12,8 +12,12 @@ input {
 }
 table {
     width: 100%;
+    border-spacing: 0px;
     border-collapse: collapse;
     table-layout: fixed;
+}
+td {
+    height: 63px;
 }
 td, th {
     padding: 10px;
@@ -22,10 +26,22 @@ td, th {
 th {
     background-color: gray;
 }
+tbody {
+    display: block;
+    width: 100%;
+    height: 300px;
+    overflow-y: auto;
+}
+tr {
+    box-sizing: border-box;
+    table-layout: fixed;
+    display: table;
+    width: 100%;
+}
 .gray_tr {
     background-color: lightgray;
 }
-.status_th {
+.status_th, .status_td {
     width: 20%;
 }
 .status_td {
