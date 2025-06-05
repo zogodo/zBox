@@ -82,6 +82,15 @@
         };
 
     });
+
+    window.onresize = ChangeWin;
+    function ChangeWin() {
+        var tbody = $("tbody")[0];
+        var thead = $("thead")[0];
+        var tb_height = document.body.clientHeight - 70 - thead.scrollHeight;
+        tbody.style.height = tb_height + "px";
+    }
+    ChangeWin();
 </script>
 </body>
 </html>
