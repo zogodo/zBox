@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,7 +17,10 @@ public class JsServer {
 
     @JavascriptInterface
     public static boolean Freeze(String pkg_name, boolean hidden) {
-        if (!MainActivity.isOwner) return false;
+        if (!MainActivity.isOwner) {
+            Toast.makeText(MainActivity.me, "操作失败, 请检查zBox是否设备管理员", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         Log.e("xx ", "Freeze zzz", null);
         MainActivity.dpm.setApplicationHidden(MainActivity.admin, pkg_name, hidden); // 隐藏/禁用 App
         return true;
@@ -41,6 +45,8 @@ public class JsServer {
             boolean hidden = false;
             if (MainActivity.isOwner) {
                 hidden = MainActivity.dpm.isApplicationHidden(MainActivity.admin, app.packageName);
+            } else {
+                hidden = MainActivity.me.getPackageManager().getLaunchIntentForPackage(app.packageName) == null;
             }
             if (hidden) {
                 Log.e("HiddenApp", app.packageName + " is hidden");

@@ -50,6 +50,7 @@ public class MainActivity extends Activity {
     @Override
     public void onResume() {
         super.onResume();
+        webView.loadUrl("javascript:SelectAll()");
     }
 
     @Override

@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body ng-app="myApp" ng-controller="myCtrl">
-    <input id="myInput" type="text" inputmode="latin" placeholder="搜索" ng-model="filter_text" ng-change="FilterApp()" />
+    <input id="search_text" type="text" inputmode="latin" placeholder="搜索" ng-model="filter_text" ng-change="FilterApp()" />
     <table>
         <thead>
         <tr>
@@ -37,7 +37,7 @@
     }
     apps.sort((a, b) => a.app_name.localeCompare(b.app_name));
 
-    document.getElementById("myInput").focus();
+    document.getElementById("search_text").focus();
 
     var app = angular.module('myApp', []);
     app.controller('myCtrl', function($scope, $http) {
@@ -47,7 +47,6 @@
             if (!is_debug) {
                 var re = window.JsServer.Freeze(app.pkg_name, !app.is_hidden);
                 if (!re) {
-                    alert("操作失败, 请检查zBox是否设备管理员!");
                     return;
                 }
             }
@@ -91,6 +90,10 @@
         tbody.style.height = tb_height + "px";
     }
     ChangeWin();
+
+    function SelectAll() {
+        document.getElementById("search_text").select();
+    }
 </script>
 </body>
 </html>
