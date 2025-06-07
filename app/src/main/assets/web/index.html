@@ -15,7 +15,7 @@
         </thead>
         <tbody>
         <tr ng-repeat="app in apps" ng-if="!app.weed_out" class="{{GetClass(app)}}">
-            <td class="status_td" ng-click="Freeze(app)" ng-bind="app.is_hidden?'已冻结':'已解冻'"></td>
+            <td class="status_td" ng-click="Freeze(app)" ng-bind="app.is_hidden?'已禁用':'已启用'"></td>
             <td ng-click="OpenApp(app)">
                 <div class="app_name_td" ng-bind="app.app_name"></div>
                 <div class="pkg_name_td" ng-bind="app.pkg_name"></div>

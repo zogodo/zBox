@@ -74,7 +74,7 @@ public class MainActivity extends Activity {
         if (launchIntent != null) {
             startActivity(launchIntent); // 启动目标应用
         } else {
-            Toast.makeText(this, "请先解冻此App", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "请先启用此App", Toast.LENGTH_SHORT).show();
         }
     }
 }
