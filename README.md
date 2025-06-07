@@ -4,6 +4,8 @@
 
 # App截图
 
+![](app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
+
 ![](doc/index.jpg)
 
 # 使用方法
