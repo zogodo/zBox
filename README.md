@@ -50,7 +50,7 @@ Active admin set to component me.zogodo.zbox/.DeviceAdminReceiver
 
 - 问：提示 `Not allowed to ... already several accounts on the device`
 
-  答：第 3 步 账户没删干净. 可以使用 `adb shell dumpsys account` 查看仍存在的账户. 如果在 手机设置 - 账户 中没有看到命令列出的账户, 则需要使用 `adb shell pm disable-user --user 0 com.example.app` 命令先禁用对应的app, 设置成功后再使用 `pm adb shell enable com.example.app`
+  答：第 3 步 账户没删干净. 可以使用 `adb shell dumpsys account` 查看仍存在的账户. 如果在 手机设置 - 账户 中没有看到命令列出的账户, 则需要使用 `adb shell pm disable-user --user 0 com.example.app` 命令先禁用对应的app, 设置成功后再使用 `pm adb shell enable com.example.app` 启用回来
 
 - 问：提示 `Not allowed to ... already several users on the device`
 
@@ -68,7 +68,7 @@ Active admin set to component me.zogodo.zbox/.DeviceAdminReceiver
 
 ## 设置成功后注意事项
 
-- 如果不行用 zBox 了, 请先启用所有的 app 再卸载 zBox, 否则将 **再也无法找回已禁用的app**
+- 如果不想用 zBox 了, 请先启用所有已禁用的 app 再卸载 zBox, 否则将 **再也无法找回已禁用的app**
 
 
 
