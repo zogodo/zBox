@@ -133,3 +133,9 @@ adb shell pm disable-user --user 0 com.tencent.qqlive
 - [x] vivo X27 (OriginOS-1.0 安卓10)
 - [x] vivo Pad Air (OriginOS-4 安卓14)
 
+
+
+# Telegram
+
+[@zbox_app](https://t.me/zbox_app)
+
