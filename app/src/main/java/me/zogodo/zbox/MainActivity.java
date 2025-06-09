@@ -5,6 +5,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.WebView;
@@ -18,6 +19,7 @@ public class MainActivity extends Activity {
     public static SqliteHelper dbHelper;
     public static boolean isOwner;
 
+    static PackageManager pm;
     static DevicePolicyManager dpm;
     static ComponentName admin;
 
@@ -37,6 +39,7 @@ public class MainActivity extends Activity {
         //Log.e("zzzc", stringFromJNI(), null);
 
         dpm = (DevicePolicyManager) this.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        pm = this.getPackageManager();
         admin = new ComponentName(this, DeviceAdminReceiver.class);
 
         isOwner = dpm.isDeviceOwnerApp(this.getPackageName());

@@ -16,13 +16,16 @@ import java.util.List;
 public class JsServer {
 
     @JavascriptInterface
-    public static boolean Disable(String pkg_name, boolean hidden) {
+    public static boolean Disable(String pkg_name, boolean disable) {
         if (!MainActivity.isOwner) {
             Toast.makeText(MainActivity.me, "操作失败, 请检查zBox是否设备管理员", Toast.LENGTH_SHORT).show();
             return false;
         }
         Log.e("xx ", "Disable zzz", null);
-        MainActivity.dpm.setApplicationHidden(MainActivity.admin, pkg_name, hidden); // 隐藏/禁用 App
+        // MainActivity.dpm.setApplicationHidden(MainActivity.admin, pkg_name, hidden); // 隐藏App
+        int state = PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
+        if (!disable) state = PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
+        MainActivity.pm.setApplicationEnabledSetting(pkg_name, state, 0); // 禁用APP
         return true;
     }
 
