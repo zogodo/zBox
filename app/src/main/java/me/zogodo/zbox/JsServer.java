@@ -22,10 +22,8 @@ public class JsServer {
             return false;
         }
         Log.e("xx ", "Disable zzz", null);
-        // MainActivity.dpm.setApplicationHidden(MainActivity.admin, pkg_name, hidden); // 隐藏App
-        int state = PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
-        if (!disable) state = PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
-        MainActivity.pm.setApplicationEnabledSetting(pkg_name, state, 0); // 禁用APP
+        MainActivity.dpm.setPackagesSuspended(MainActivity.admin, new String[]{pkg_name}, disable); //停用
+        MainActivity.dpm.setApplicationHidden(MainActivity.admin, pkg_name, disable); // 隐藏
         return true;
     }
 
@@ -40,14 +38,19 @@ public class JsServer {
     public static String GetAppList() throws JSONException {
         JSONArray jsonArray = new JSONArray();
         PackageManager pm = MainActivity.me.getPackageManager();
-        List<PackageInfo> allApps = pm.getInstalledPackages(PackageManager.MATCH_DISABLED_COMPONENTS);
+        List<PackageInfo> allApps = pm.getInstalledPackages(PackageManager.MATCH_DISABLED_COMPONENTS | PackageManager.MATCH_UNINSTALLED_PACKAGES);
         for (PackageInfo app : allApps) {
             if (MainActivity.me.getPackageName().equals(app.packageName)) continue; //跳过自己
             if ((app.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 1) continue; //跳过系统应用
 
-            boolean disabled = !app.applicationInfo.enabled;
+            boolean disabled = false;
+            if (MainActivity.isOwner) {
+                disabled = MainActivity.dpm.isApplicationHidden(MainActivity.admin, app.packageName);
+            } else {
+                disabled = MainActivity.me.getPackageManager().getLaunchIntentForPackage(app.packageName) == null;
+            }
             if (disabled) {
-                Log.e("HiddenApp", app.packageName + " is disabled");
+                Log.e("HiddenApp", app.packageName + " is hidden");
             }
 
             JSONObject jsonObject = new JSONObject();

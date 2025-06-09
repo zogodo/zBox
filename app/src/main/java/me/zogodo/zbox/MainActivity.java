@@ -20,7 +20,7 @@ public class MainActivity extends Activity {
 
     static PackageManager pm;
     static DevicePolicyManager dpm;
-    //static ComponentName admin;
+    static ComponentName admin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
 
         dpm = (DevicePolicyManager) this.getSystemService(Context.DEVICE_POLICY_SERVICE);
         pm = this.getPackageManager();
-        //admin = new ComponentName(this, DeviceAdminReceiver.class);
+        admin = new ComponentName(this, DeviceAdminReceiver.class);
         isOwner = dpm.isDeviceOwnerApp(this.getPackageName());
         Log.e("DeviceOwner", "Is device owner? " + isOwner);
 
