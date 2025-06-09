@@ -127,9 +127,9 @@ adb shell pm disable-user --user 0 com.tencent.qqlive
 
 
 
-# 已支持设备
+# 已测试成功设备
 
-- [x] 一加 3T
-- [x] vivo X27
-- [x] vivo Pad Air
+- [x] 一加 3T (氢OS-5.0 安卓8.0)
+- [x] vivo X27 (OriginOS-1.0 安卓10)
+- [x] vivo Pad Air (OriginOS-4 安卓14)
 
