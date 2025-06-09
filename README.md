@@ -4,9 +4,9 @@
 
 # App截图
 
-![](app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
+![](https://raw.githubusercontent.com/zogodo/zBox/refs/heads/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 
-![](doc/index.jpg)
+![](https://raw.githubusercontent.com/zogodo/zBox/refs/heads/master/doc/index.jpg)
 
 # 使用方法
 

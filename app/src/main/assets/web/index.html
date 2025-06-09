@@ -86,7 +86,7 @@
     function ChangeWin() {
         var tbody = $("tbody")[0];
         var thead = $("thead")[0];
-        var tb_height = document.body.clientHeight - 70 - thead.scrollHeight;
+        var tb_height = window.innerHeight - 120;
         tbody.style.height = tb_height + "px";
     }
     ChangeWin();
