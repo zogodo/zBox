@@ -40,18 +40,12 @@ public class JsServer {
     public static String GetAppList() throws JSONException {
         JSONArray jsonArray = new JSONArray();
         PackageManager pm = MainActivity.me.getPackageManager();
-        List<PackageInfo> allApps = pm.getInstalledPackages(PackageManager.MATCH_DISABLED_COMPONENTS | PackageManager.MATCH_UNINSTALLED_PACKAGES);
+        List<PackageInfo> allApps = pm.getInstalledPackages(PackageManager.MATCH_DISABLED_COMPONENTS);
         for (PackageInfo app : allApps) {
             if (MainActivity.me.getPackageName().equals(app.packageName)) continue; //跳过自己
             if ((app.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 1) continue; //跳过系统应用
 
-            boolean disabled = false;
-            if (MainActivity.isOwner) {
-                int state = MainActivity.pm.getApplicationEnabledSetting(app.packageName);
-                disabled = state == PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
-            } else {
-                disabled = MainActivity.me.getPackageManager().getLaunchIntentForPackage(app.packageName) == null;
-            }
+            boolean disabled = !app.applicationInfo.enabled;
             if (disabled) {
                 Log.e("HiddenApp", app.packageName + " is disabled");
             }
