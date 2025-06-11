@@ -5,6 +5,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.WebView;
@@ -15,9 +16,9 @@ public class MainActivity extends Activity {
     public static String indexUrl = "file:///android_asset/web/index.html";
     public static WebView webView = null;
     long exitTime = 0;
-    public static SqliteHelper dbHelper;
     public static boolean isOwner;
 
+    static PackageManager pm;
     static DevicePolicyManager dpm;
     static ComponentName admin;
 
@@ -25,20 +26,11 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MainActivity.me = this;
-        dbHelper = new SqliteHelper(this);
-
-        Intent intent = getIntent();
-        String dataString = intent.getDataString();
-        if (dataString != null) {
-            dataString = dataString.replaceAll("://z/", "://");
-            indexUrl = dataString;
-        }
         Log.e("zurl", indexUrl, null);
-        //Log.e("zzzc", stringFromJNI(), null);
 
         dpm = (DevicePolicyManager) this.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        pm = this.getPackageManager();
         admin = new ComponentName(this, DeviceAdminReceiver.class);
-
         isOwner = dpm.isDeviceOwnerApp(this.getPackageName());
         Log.e("DeviceOwner", "Is device owner? " + isOwner);
 

@@ -16,13 +16,14 @@ import java.util.List;
 public class JsServer {
 
     @JavascriptInterface
-    public static boolean Disable(String pkg_name, boolean hidden) {
+    public static boolean Disable(String pkg_name, boolean disable) {
         if (!MainActivity.isOwner) {
             Toast.makeText(MainActivity.me, "操作失败, 请检查zBox是否设备管理员", Toast.LENGTH_SHORT).show();
             return false;
         }
         Log.e("xx ", "Disable zzz", null);
-        MainActivity.dpm.setApplicationHidden(MainActivity.admin, pkg_name, hidden); // 隐藏/禁用 App
+        MainActivity.dpm.setPackagesSuspended(MainActivity.admin, new String[]{pkg_name}, disable); //停用
+        MainActivity.dpm.setApplicationHidden(MainActivity.admin, pkg_name, disable); // 隐藏
         return true;
     }
 
@@ -42,13 +43,13 @@ public class JsServer {
             if (MainActivity.me.getPackageName().equals(app.packageName)) continue; //跳过自己
             if ((app.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 1) continue; //跳过系统应用
 
-            boolean hidden = false;
+            boolean disabled = false;
             if (MainActivity.isOwner) {
-                hidden = MainActivity.dpm.isApplicationHidden(MainActivity.admin, app.packageName);
+                disabled = MainActivity.dpm.isApplicationHidden(MainActivity.admin, app.packageName);
             } else {
-                hidden = MainActivity.me.getPackageManager().getLaunchIntentForPackage(app.packageName) == null;
+                disabled = MainActivity.me.getPackageManager().getLaunchIntentForPackage(app.packageName) == null;
             }
-            if (hidden) {
+            if (disabled) {
                 Log.e("HiddenApp", app.packageName + " is hidden");
             }
 
@@ -57,7 +58,7 @@ public class JsServer {
             if (cs[0] >= 'a' && cs[0] <= 'z') cs[0] -= 32; //首字母大写
             jsonObject.put("pkg_name", app.packageName);
             jsonObject.put("app_name", String.valueOf(cs));
-            jsonObject.put("is_hidden", hidden);
+            jsonObject.put("disabled", disabled);
             jsonArray.put(jsonObject);
             //Log.e("zzz", "getAppList1 [" + app.packageName + "] [" + String.valueOf(cs) + "]");
         }
