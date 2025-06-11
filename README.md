@@ -129,9 +129,10 @@ adb shell pm disable-user --user 0 com.tencent.qqlive
 
 # 已测试成功设备
 
-- [x] 一加 3T (氢OS-5.0 安卓8.0)
-- [x] vivo X27 (OriginOS-1.0 安卓10)
-- [x] vivo Pad Air (OriginOS-4 安卓14)
+- [ ] vivo Pad Air (OriginOS-4 安卓14) (恢复出厂设置,没试过adb)
+- [ ] 一加 3T (氢OS-5.0 安卓8.0) (恢复出厂设置,没试过dab)
+- [x] vivo X27 (OriginOS-1.0 安卓10) (用adb禁用对应账户的包名后可以)
+- [ ] iQOO Neo8 (OriginOS-5 安卓15) (无法删除XSpace-666用户,需要恢复出厂设置)
 
 
 
