@@ -56,6 +56,11 @@
 
         $scope.OpenApp = function(app) {
             if (is_debug) return;
+            if (app.disabled) {
+                var re = window.JsServer.Disable(app.pkg_name, false);
+                if (!re) return;
+                app.disabled = false;
+            }
             window.JsServer.OpenApp(app.pkg_name);
         };
 
