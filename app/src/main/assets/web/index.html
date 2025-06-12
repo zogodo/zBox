@@ -49,6 +49,7 @@
             if (!is_debug) {
                 var re = window.JsServer.Disable(app.pkg_name, app.disabled);
                 if (!re) {
+                    app.disabled = !app.disabled;
                     return;
                 }
             }
