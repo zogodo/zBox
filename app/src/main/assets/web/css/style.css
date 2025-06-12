@@ -48,7 +48,7 @@ tr {
     background-color: lightgray;
 }
 .status_th, .status_td {
-    width: 47.5px;
+    width: 20%;
 }
 .status_td {
     text-align: center;
