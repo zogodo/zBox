@@ -9,13 +9,15 @@
     <table>
         <thead>
         <tr>
-            <th class="status_th">状态</td>
+            <th class="status_th">禁用</td>
             <th>应用</td>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="app in apps" ng-if="!app.weed_out" class="{{GetClass(app)}}">
-            <td class="status_td" ng-click="Disable(app)" ng-bind="app.disabled?'已禁用':'已启用'"></td>
+            <td class="status_td">
+                <input type="checkbox" ng-model="app.disabled" ng-change="Disable(app)">
+            </td>
             <td ng-click="OpenApp(app)">
                 <div class="app_name_td" ng-bind="app.app_name"></div>
                 <div class="pkg_name_td" ng-bind="app.pkg_name"></div>
@@ -45,12 +47,11 @@
 
         $scope.Disable = function(app) {
             if (!is_debug) {
-                var re = window.JsServer.Disable(app.pkg_name, !app.disabled);
+                var re = window.JsServer.Disable(app.pkg_name, app.disabled);
                 if (!re) {
                     return;
                 }
             }
-            app.disabled = !app.disabled;
         };
 
         $scope.OpenApp = function(app) {

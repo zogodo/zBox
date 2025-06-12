@@ -10,6 +10,10 @@ input {
     padding: 10px;
     margin-bottom: 10px;
 }
+input[type=checkbox] {
+    padding: 0;
+    margin: 0;
+}
 table {
     width: 100%;
     border-spacing: 0px;
@@ -44,7 +48,7 @@ tr {
     background-color: lightgray;
 }
 .status_th, .status_td {
-    width: 20%;
+    width: 47.5px;
 }
 .status_td {
     text-align: center;
