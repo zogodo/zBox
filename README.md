@@ -16,9 +16,13 @@
 
 # 使用方法
 
-<b style="color:red">开始前请对手机里的重要数据进行备份! 因使用 zBox 造成的任何损失, 由使用者自行负责</b>
+## 1. 备份手机数据
 
-## 1. 检查手机是否有多个user
+备份好手机上的数据, 包括但不限于: 照片, 视频, 下载的文件, 微信QQ聊天记录, 二步验证秘钥
+
+
+
+## 2. 检查手机是否有多个user
 
 执行以下命令:
 
@@ -57,7 +61,7 @@ adb shell pm remove-user 999
 
 
 
-## 2. 检查手机是否登录了account
+## 3. 检查手机是否登录了account
 
 执行以下命令:
 
@@ -99,9 +103,9 @@ adb shell pm enable com.example.app
 
 
 
-## 3. 设置zBox为设备管理员
+## 4. 设置zBox为设备管理员
 
-确保以上两步完成后执行以下命令:
+确保以上几步完成后执行以下命令:
 
 ```sh
 adb shell dpm set-device-owner me.zogodo.zbox/.DeviceAdminReceiver
