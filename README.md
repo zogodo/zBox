@@ -148,22 +148,8 @@ Active admin set to component me.zogodo.zbox/.DeviceAdminReceiver
 # 其它命令
 
 ```sh
-#查看已存在的用户
-adb shell pm list users
-
-#删除用户
-adb shell pm remove-user $ID
-
 #移除设备管理员(移除后需要恢复出厂设置才能再设置其他管理员)
 adb shell dpm remove-active-admin me.zogodo.zbox/.DeviceAdminReceiver
-
-# 禁用应用
-pm disable-user --user 0 com.example.app
-
-# 启用应用
-pm enable com.example.app
-
-adb shell pm disable-user --user 0 com.tencent.qqlive
 
 ```
 
