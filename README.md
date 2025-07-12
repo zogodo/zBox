@@ -113,7 +113,7 @@ adb shell dpm set-device-owner me.zogodo.zbox/.DeviceAdminReceiver
 
 如果看到类似如下输出, 说明设置成功了. 可以开始使用 zBox了. 此时可以把之前删除的帐号登回来了
 
-```
+```sh
 Success: Device owner set to package me.zogodo.zbox/.DeviceAdminReceiver
 Active admin set to component me.zogodo.zbox/.DeviceAdminReceiver
 ```
