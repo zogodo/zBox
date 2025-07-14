@@ -30,7 +30,7 @@
 adb shell pm list users
 ```
 
-如果显示如下:  Users: 下面只有一行 user 0, 可以继续第二步
+如果显示如下:  Users: 下面只有一行 user 0, 可以继续第 3 步
 
 ```sh
 $ adb shell pm list users
@@ -51,7 +51,7 @@ Users:
 
 删除方法:
 
-关闭 应用双开, 多用户, 访客模式 等
+关闭 应用双开, 多用户, 访客模式 等, 然后重启手机.
 
 或者执行以下命令:  (999 是user id)
 
